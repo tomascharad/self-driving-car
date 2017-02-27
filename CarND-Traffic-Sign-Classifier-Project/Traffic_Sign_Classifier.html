@@ -12634,6 +12634,15 @@ RK5CYII=
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
@@ -14511,6 +14520,15 @@ Model saved
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <hr>
 <h2 id="Step-3:-Test-a-Model-on-New-Images">Step 3: Test a Model on New Images<a class="anchor-link" href="#Step-3:-Test-a-Model-on-New-Images">&#182;</a></h2><p>To give yourself more insight into how your model is working, download at least five pictures of German traffic signs from the web and use your model to predict the traffic sign type.</p>
 <p>You may find <code>signnames.csv</code> useful as it contains mappings from the class id (integer) to the actual sign name.</p>
@@ -15665,18 +15683,71 @@ Lowering the quantity of examples and the quantity of the distortion might help?
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Rubric-Points">Rubric Points<a class="anchor-link" href="#Rubric-Points">&#182;</a></h2><h3 id="Here-I-will-consider-the-rubric-points-individually-and-describe-how-I-addressed-each-point-in-my-implementation.">Here I will consider the <a href="https://review.udacity.com/#!/rubrics/481/view">rubric points</a> individually and describe how I addressed each point in my implementation.<a class="anchor-link" href="#Here-I-will-consider-the-rubric-points-individually-and-describe-how-I-addressed-each-point-in-my-implementation.">&#182;</a></h3><hr>
+<h4 id="1.-Describe-how,-and-identify-where-in-your-code,-you-preprocessed-the-image-data.-What-tecniques-were-chosen-and-why-did-you-choose-these-techniques?-Consider-including-images-showing-the-output-of-each-preprocessing-technique.-Pre-processing-refers-to-techniques-such-as-converting-to-grayscale,-normalization,-etc.">1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.<a class="anchor-link" href="#1.-Describe-how,-and-identify-where-in-your-code,-you-preprocessed-the-image-data.-What-tecniques-were-chosen-and-why-did-you-choose-these-techniques?-Consider-including-images-showing-the-output-of-each-preprocessing-technique.-Pre-processing-refers-to-techniques-such-as-converting-to-grayscale,-normalization,-etc.">&#182;</a></h4><p>TCT: For augmenting the data, I've decided to make rotations and translations.
+I didn't go for flips or other trasnforms because I think that the interpretation of some traffic sign might get other meaning if flipping or rotatitng to much (Like dangerous curve go left or go right). This is why rotation is only between +-15 degrees.
+For translating I've only used +- 5 pixels since If I use too much translation, the images would have gone off the frame.
+I would have like to get another 'mode' than nearest (For example zoom). Bu t I didn't find a quick way to do that.</p>
+<p>TCT: For preprocesing, I used grayscale, and then I normalized the images. Normalizing is a good practice since it allows the search algorithms to perform better.</p>
+<h4 id="2.-Describe-how,-and-identify-where-in-your-code,-you-set-up-training,-validation-and-testing-data.-How-much-data-was-in-each-set?-Explain-what-techniques-were-used-to-split-the-data-into-these-sets.-(OPTIONAL:-As-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric,-if-you-generated-additional-data-for-training,-describe-why-you-decided-to-generate-additional-data,-how-you-generated-the-data,-identify-where-in-your-code,-and-provide-example-images-of-the-additional-data)">2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)<a class="anchor-link" href="#2.-Describe-how,-and-identify-where-in-your-code,-you-set-up-training,-validation-and-testing-data.-How-much-data-was-in-each-set?-Explain-what-techniques-were-used-to-split-the-data-into-these-sets.-(OPTIONAL:-As-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric,-if-you-generated-additional-data-for-training,-describe-why-you-decided-to-generate-additional-data,-how-you-generated-the-data,-identify-where-in-your-code,-and-provide-example-images-of-the-additional-data)">&#182;</a></h4><p>The code for splitting the data into training and validation sets is given by the same datasets provided by Udacity. They are already splitted on trainig, validation and test sets on Step 0.</p>
+<p>My final training set was augmented since not all classes had the same amount of examples, so I decided to normalize the quantity of each class by setting 1500 images at minumum per class. The extra images were augmented ones and they were made by the 'augment' function.</p>
+<h4 id="3.-Describe,-and-identify-where-in-your-code,-what-your-final-model-architecture-looks-like-including-model-type,-layers,-layer-sizes,-connectivity,-etc.)-Consider-including-a-diagram-and/or-table-describing-the-final-model.">3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.<a class="anchor-link" href="#3.-Describe,-and-identify-where-in-your-code,-what-your-final-model-architecture-looks-like-including-model-type,-layers,-layer-sizes,-connectivity,-etc.)-Consider-including-a-diagram-and/or-table-describing-the-final-model.">&#182;</a></h4><p>The code for my final model is located in the seventh cell of the ipython notebook.</p>
+<p>My final model consisted of the following layers:</p>
+<p>My model is based on LeNet, but it includes two dropout stages: One after the first activation, and a second one after the third activation:</p>
+<ol>
+<li>Input 32x32x1</li>
+<li>Convolution 5x5x1 filter Output = 28x28x6</li>
+<li>Relu activation</li>
+<li>Droput</li>
+<li>Pooling: Max Pool Input 28x28x6 Output = 14x14x6</li>
+<li>Convolution Output = 10x10x16</li>
+<li>Relu</li>
+<li>MaxPoll Input 10x10x16, Output: 5x5x16</li>
+<li>Flatten 5x5x16 Output 400</li>
+<li>Fully connected Input 400, Output 120</li>
+<li>Relu</li>
+<li>Dropout</li>
+<li>Fully connected Input 120, Output 84</li>
+<li>Relu</li>
+<li>Fully connected Input 84, Output 10</li>
+</ol>
+<h4 id="4.-Describe-how,-and-identify-where-in-your-code,-you-trained-your-model.-The-discussion-can-include-the-type-of-optimizer,-the-batch-size,-number-of-epochs-and-any-hyperparameters-such-as-learning-rate.">4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.<a class="anchor-link" href="#4.-Describe-how,-and-identify-where-in-your-code,-you-trained-your-model.-The-discussion-can-include-the-type-of-optimizer,-the-batch-size,-number-of-epochs-and-any-hyperparameters-such-as-learning-rate.">&#182;</a></h4><p>TCT: My model was trained in 10 Epochs and a Batch size of 128. Also the keep_prob used for Dropout was of 0.9, since after evaluating different values, more than 0.9 made the model to underfit.</p>
+<h4 id="5.-Describe-the-approach-taken-for-finding-a-solution.-Include-in-the-discussion-the-results-on-the-training,-validation-and-test-sets-and-where-in-the-code-these-were-calculated.-Your-approach-may-have-been-an-iterative-process,-in-which-case,-outline-the-steps-you-took-to-get-to-the-final-solution-and-why-you-chose-those-steps.-Perhaps-your-solution-involved-an-already-well-known-implementation-or-architecture.-In-this-case,-discuss-why-you-think-the-architecture-is-suitable-for-the-current-problem.">5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.<a class="anchor-link" href="#5.-Describe-the-approach-taken-for-finding-a-solution.-Include-in-the-discussion-the-results-on-the-training,-validation-and-test-sets-and-where-in-the-code-these-were-calculated.-Your-approach-may-have-been-an-iterative-process,-in-which-case,-outline-the-steps-you-took-to-get-to-the-final-solution-and-why-you-chose-those-steps.-Perhaps-your-solution-involved-an-already-well-known-implementation-or-architecture.-In-this-case,-discuss-why-you-think-the-architecture-is-suitable-for-the-current-problem.">&#182;</a></h4><p>The code for calculating the accuracy of the model is located under the Analyze Performance title.</p>
+<p>My final model results were:</p>
+<ul>
+<li>validation set accuracy of 0.911</li>
+<li>test set accuracy of 0.904</li>
+</ul>
+<p>If an iterative approach was chosen:</p>
+<ul>
+<li>What was the first architecture that was tried and why was it chosen?
+I used LeNet as a starting point</li>
+<li>What were some problems with the initial architecture?
+There weren't many problems that I could see at a first glance, but I added some dropout just in case I would have seen overfitting, which wasn't my case.</li>
+<li>Which parameters were tuned? How were they adjusted and why?
+I never changed the parameters since 10 EPOCHS were just right. I tested with more but the model started to overfit a bit, that's why I just contrained to 10 Epochs and the 128 batch size and tried to play with the amount of augmented data rather with those parameters.</li>
+</ul>
+<p>If a well known architecture was chosen:</p>
+<ul>
+<li>What architecture was chosen?
+LeNet was Chosen as a base</li>
+<li>Why did you believe it would be relevant to the traffic sign application?
+I just think that from my amount of knowledge I rather spend time playing with preprocessing and augmentation rather than the model itself. I think that it was bettter to understand how could I improve a model by the data on which it was feed, rather to try playing with different models. I think that trying with different models would need a bit more of kowledge of deep learning itself.</li>
+<li>How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+Well, I don't think that my model thas an excelent Job since I just only got 0.9 of accuracy, I would have expect at least 0.95.
+I think some of the samples for some classes (like class 0) wasn't very good. I tried augmenting those classes but I didn't got much lucky.</li>
+</ul>
+<h3 id="Test-a-Model-on-New-Images">Test a Model on New Images<a class="anchor-link" href="#Test-a-Model-on-New-Images">&#182;</a></h3><h4 id="1.-Choose-five-German-traffic-signs-found-on-the-web-and-provide-them-in-the-report.-For-each-image,-discuss-what-quality-or-qualities-might-be-difficult-to-classify.">1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.<a class="anchor-link" href="#1.-Choose-five-German-traffic-signs-found-on-the-web-and-provide-them-in-the-report.-For-each-image,-discuss-what-quality-or-qualities-might-be-difficult-to-classify.">&#182;</a></h4><p>I'm using a big test set, so I don't really can discuss every image on this set.</p>
+<h4 id="2.-Discuss-the-model's-predictions-on-these-new-traffic-signs-and-compare-the-results-to-predicting-on-the-test-set.-Identify-where-in-your-code-predictions-were-made.-At-a-minimum,-discuss-what-the-predictions-were,-the-accuracy-on-these-new-predictions,-and-compare-the-accuracy-to-the-accuracy-on-the-test-set-(OPTIONAL:-Discuss-the-results-in-more-detail-as-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric).">2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).<a class="anchor-link" href="#2.-Discuss-the-model's-predictions-on-these-new-traffic-signs-and-compare-the-results-to-predicting-on-the-test-set.-Identify-where-in-your-code-predictions-were-made.-At-a-minimum,-discuss-what-the-predictions-were,-the-accuracy-on-these-new-predictions,-and-compare-the-accuracy-to-the-accuracy-on-the-test-set-(OPTIONAL:-Discuss-the-results-in-more-detail-as-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric).">&#182;</a></h4><p>I think that my model is neither underfit or overfit given that my test and validation accuracy is very close. Also you can also note how the validation accuracy foud its peak on EPOCH 10, so having trained the mother further would have meant probably overfiting.</p>
+<h4 id="3.-Describe-how-certain-the-model-is-when-predicting-on-each-of-the-five-new-images-by-looking-at-the-softmax-probabilities-for-each-prediction-and-identify-where-in-your-code-softmax-probabilities-were-outputted.-Provide-the-top-5-softmax-probabilities-for-each-image-along-with-the-sign-type-of-each-probability.-(OPTIONAL:-as-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric,-visualizations-can-also-be-provided-such-as-bar-charts)">3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)<a class="anchor-link" href="#3.-Describe-how-certain-the-model-is-when-predicting-on-each-of-the-five-new-images-by-looking-at-the-softmax-probabilities-for-each-prediction-and-identify-where-in-your-code-softmax-probabilities-were-outputted.-Provide-the-top-5-softmax-probabilities-for-each-image-along-with-the-sign-type-of-each-probability.-(OPTIONAL:-as-described-in-the-&quot;Stand-Out-Suggestions&quot;-part-of-the-rubric,-visualizations-can-also-be-provided-such-as-bar-charts)">&#182;</a></h4><p>For this part, I made a graph showing the F1 score with their respective precision and recall for each class. I found that the best performing classes were usually the ones with the highes amount of images before augmentation.</p>
 
 </div>
 </div>
-</div>
-
 </div>
     </div>
   </div>
