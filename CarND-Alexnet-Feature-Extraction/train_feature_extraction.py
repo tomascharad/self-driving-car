@@ -49,6 +49,8 @@ w = tf.Variable(tf.truncated_normal([x_dim, nb_classes], mu, sigma))
 b = tf.Variable(tf.truncated_normal([nb_classes], mu, sigma))
 logits = tf.add(tf.matmul(fc7, w), b)
 
+EPOCHS = 10
+BATCH_SIZE = 128
 
 # TODO: Define loss, training, accuracy operations.
 rate = 0.001
@@ -74,11 +76,14 @@ def evaluate(X_data, y_data):
 # be able to reuse some the code.
 
 # TODO: Train and evaluate the feature extraction model.
-EPOCHS = 10
-BATCH_SIZE = 128
+
 sample_ids = np.random.choice(X_train.shape[0], 200)
 X_train_sample = X_train[sample_ids]
 y_train_sample = y_train[sample_ids]
+
+sample_ids = np.random.choice(X_valid.shape[0], 200)
+X_valid_sample = X_valid[sample_ids]
+y_valid_sample = y_valid[sample_ids]
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     num_examples = len(X_train_sample)
@@ -91,8 +96,8 @@ with tf.Session() as sess:
             end = offset + BATCH_SIZE
             batch_x, batch_y = X_train_sample[offset:end], y_train_sample[offset:end]
             sess.run(training_operation, feed_dict={x: batch_x, y: batch_y})
-            
-        validation_accuracy = evaluate(X_valid, y_valid)
+        
+        validation_accuracy = evaluate(X_valid_sample, y_valid_sample)
         print("EPOCH {} ...".format(i+1))
         print("Validation Accuracy = {:.3f}".format(validation_accuracy))
         print()
