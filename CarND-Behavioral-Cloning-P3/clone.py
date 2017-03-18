@@ -18,7 +18,13 @@ train_samples, validation_samples = train_test_split(samples, test_size=0.2)
 import cv2
 import sklearn
 
-correction = 0.2  
+correction = 0.2
+
+def augment_brighnes(image):
+  hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV) #convert it to hsv
+  hsv[2] = hsv[2] + np.random.randint(-10, 10, dtype=np.int8) # change brightness of images (by -10 to 10 of original value)
+  hsv[2] = hsv[2] * np.random.randint(5, 15, dtype=np.uint8) / 10  # change brightness of images (50-150% of original value)
+  return cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
 
 def generator(samples, batch_size=32):
   num_samples = len(samples)
@@ -40,11 +46,18 @@ def generator(samples, batch_size=32):
           name = './data/IMG/'+batch_sample[i].split('/')[-1]
           # print(name)
           image = cv2.imread(name)
+
           images.append(image)
           angles.append(actual_steering)
           # TCT: Augmentation
           images.append(cv2.flip(image,1))
           angles.append(actual_steering * -1.0)
+
+          images.append(augment_brighnes(image))
+          angles.append(actual_steering)
+          # TCT: brightness
+          
+
 
       # trim image to only see section with road
       X_train = np.array(images)
@@ -56,7 +69,7 @@ validation_generator = generator(validation_samples, batch_size=32)
 
 print('Defining model')
 from keras.models import Sequential
-from keras.layers import Flatten, Dense, Lambda, Cropping2D
+from keras.layers import Flatten, Dense, Lambda, Cropping2D, Dropout
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
 
@@ -74,9 +87,14 @@ model.add(Dense(50))
 model.add(Dense(1))
 
 model.compile(loss='mse', optimizer='adam')
+
+from keras.utils.visualize_util import plot
+plot(model, to_file='model.png')
+
 print('Fitting model')
-history_object = model.fit_generator(train_generator, samples_per_epoch=len(train_samples), validation_data=validation_generator, nb_val_samples=len(validation_samples), nb_epoch=3)
-model.save('model.h5')
+history_object = model.fit_generator(train_generator, samples_per_epoch=len(train_samples) * 3, validation_data=validation_generator, nb_val_samples=len(validation_samples) * 3, nb_epoch=3)
+model.save('model_brightness.h5')
+print('Finishing saving model')
 
 import matplotlib.pyplot as plt
 plt.plot(history_object.history['loss'])
