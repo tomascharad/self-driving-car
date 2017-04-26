@@ -22,8 +22,9 @@ The goals / steps of this project are the following:
 [image2]: ./test_images/undistortedExample.png "Road Transformed"
 [image3]: ./examples/binary.png "Binary Example"
 [image4]: ./examples/perspectiveTransform.png "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image5]: ./examples/fop.png "First order polinomial"
+[image6]: ./examples/sop.png "Second order polinomial"
+[image7]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -69,7 +70,7 @@ This resulted in the following source and destination points:
 | 1127, 720     | 960, 720      |
 | 203, 720      | 320, 720      |
 
-I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
+I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image. Even though the lines cannot be very well seen. In the first image the lines are drawn in black and white.
 
 ![alt text][image4]
 
@@ -78,16 +79,17 @@ I verified that my perspective transform was working as expected by drawing the 
 Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
 
 ![alt text][image5]
+![alt text][image6]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I did this in on the methods `calculate_curvature(...)`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image6]
+![alt text][image7]
 
 ---
 
@@ -95,7 +97,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](https://drive.google.com/file/d/0B3F-Rn6bPunbZ0sxV1RmMjlsbFU/view?usp=sharing¶)
 
 ---
 
@@ -103,5 +105,5 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+I haven't still be able to use a state on which to save the last line calculated. Have to dive a bit deeper on how to pass a state to `clip1.fl_image`.
 
