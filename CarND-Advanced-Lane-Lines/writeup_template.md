@@ -1,5 +1,5 @@
-##Writeup Template
-###You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
+## Writeup Template
+### You can use this file as a template for your writeup if you want to submit it as a markdown file, but feel free to use some other method and submit a pdf if you prefer.
 
 ---
 
@@ -19,12 +19,12 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./output_images/undistortion.png "Undistorted"
-[image2]: ./test_images/undistortedExample.png "Road Transformed"
+[image2]: ./output_images/undistortedExample.png "Road Transformed"
 [image3]: ./examples/binary.png "Binary Example"
 [image4]: ./examples/perspectiveTransform.png "Warp Example"
 [image5]: ./examples/fop.png "First order polinomial"
 [image6]: ./examples/sop.png "Second order polinomial"
-[image7]: ./examples/example_output.jpg "Output"
+[image7]: ./examples/out_test6.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -41,15 +41,15 @@ I start by preparing "object points", which will be the (x, y, z) coordinates of
 
 I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
 
-![alt text][image1]
+![undistortion][image1]
 
 ### Pipeline (single images)
 
 #### 1. Provide an example of a distortion-corrected image.
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
-![alt text][image2]
+![undistortedExample][image2]
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of color and gradient thresholds to generate a binary image (thresholding steps in the function `apply_tresh` in the file `example.ipynb`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
 
 ![alt text][image3]
 
