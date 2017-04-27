@@ -20,11 +20,11 @@ The goals / steps of this project are the following:
 
 [image1]: ./output_images/undistortion.png "Undistorted"
 [image2]: ./output_images/undistortedExample.png "Road Transformed"
-[image3]: ./examples/binary.png "Binary Example"
-[image4]: ./examples/perspectiveTransform.png "Warp Example"
-[image5]: ./examples/fop.png "First order polinomial"
-[image6]: ./examples/sop.png "Second order polinomial"
-[image7]: ./examples/out_test6.jpg "Output"
+[image3]: ./output_images/binary.png "Binary Example"
+[image4]: ./output_images/perspectiveTransform.png "Warp Example"
+[image5]: ./output_images/fop.png "First order polinomial"
+[image6]: ./output_images/sop.png "Second order polinomial"
+[image7]: ./output_images/out_test6.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
