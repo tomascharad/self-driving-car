@@ -107,3 +107,6 @@ Here's a [link to my video result](https://drive.google.com/file/d/0B3F-Rn6bPunb
 
 I haven't still be able to use a state on which to save the last line calculated. Have to dive a bit deeper on how to pass a state to `clip1.fl_image`.
 
+I think that if I enable the line class as a state, then I could make a better prediction when the lanes are predicted to much abruptly from the past predictions, as for example in the end of the video.
+
+A failure on the pipeline might be caused by the threshold not detecting enough lane points, in that case, we will have no data for the curvate.
