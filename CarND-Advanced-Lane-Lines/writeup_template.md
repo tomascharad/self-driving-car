@@ -20,11 +20,11 @@ The goals / steps of this project are the following:
 
 [image1]: ./output_images/undistortion.png "Undistorted"
 [image2]: ./output_images/undistortedExample.png "Road Transformed"
-[image3]: ./examples/binary.png "Binary Example"
-[image4]: ./examples/perspectiveTransform.png "Warp Example"
-[image5]: ./examples/fop.png "First order polinomial"
-[image6]: ./examples/sop.png "Second order polinomial"
-[image7]: ./examples/out_test6.jpg "Output"
+[image3]: ./output_images/binary.png "Binary Example"
+[image4]: ./output_images/perspectiveTransform.png "Warp Example"
+[image5]: ./output_images/fop.png "First order polinomial"
+[image6]: ./output_images/sop.png "Second order polinomial"
+[image7]: ./output_images/out_test6.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -87,7 +87,7 @@ I did this in on the methods `calculate_curvature(...)`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this step in lines # through # in my code in `example.ipynb` in the function `process_image(...)`.  Here is an example of my result on a test image:
 
 ![alt text][image7]
 
