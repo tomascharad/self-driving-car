@@ -22,8 +22,8 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/undistortedExample.png "Road Transformed"
 [image3]: ./output_images/binary.png "Binary Example"
 [image4]: ./output_images/perspectiveTransform.png "Warp Example"
-[image5]: ./output_images/fop.png "First order polinomial"
-[image6]: ./output_images/sop.png "Second order polinomial"
+[image5]: ./output_images/slidingWindow.png "Sliding Window"
+[image6]: ./output_images/curvature.png "Curvature"
 [image7]: ./output_images/out_test6.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
@@ -76,14 +76,14 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I detected the cuves with sliding windows and I fitted my lane lines with a 2nd order polynomial and applied some sanity checks like distance thresholds and curvature similarity between lanes:
 
 ![alt text][image5]
 ![alt text][image6]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in on the methods `calculate_curvature(...)`
+I calculated curvature on `calculate_curvature(...)` and the center deviation on `get_texted_image(...)`
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
