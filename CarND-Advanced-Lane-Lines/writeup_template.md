@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/perspectiveTransform.png "Warp Example"
 [image5]: ./output_images/slidingWindow.png "Sliding Window"
 [image6]: ./output_images/curvature.png "Curvature"
-[image7]: ./output_images/out_test6.jpg "Output"
+[image7]: ./output_images/out_test5.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -76,7 +76,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-I detected the cuves with sliding windows and I fitted my lane lines with a 2nd order polynomial and applied some sanity checks like distance thresholds and curvature similarity between lanes:
+I detected the curves with sliding windows and I fitted my lane lines with a 2nd order polynomial and applied some sanity checks like distance thresholds and curvature similarity between lanes:
 
 ![alt text][image5]
 ![alt text][image6]
