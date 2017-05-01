@@ -97,7 +97,7 @@ I implemented this step in lines # through # in my code in `example.ipynb` in th
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](https://drive.google.com/file/d/0B3F-Rn6bPunbOGFHbXZMS1lEQnM/view?usp=sharing)
+Here's a [link to my video result](https://drive.google.com/file/d/0B3F-Rn6bPunbVGtTWUp3UG9ucEU/view?usp=sharing)
 
 ---
 
