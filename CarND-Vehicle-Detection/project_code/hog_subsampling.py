@@ -16,7 +16,7 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
     if scale != 1:
         imshape = ctrans_tosearch.shape
         ctrans_tosearch = cv2.resize(ctrans_tosearch, (np.int(imshape[1]/scale), np.int(imshape[0]/scale)))
-        
+
     ch1 = ctrans_tosearch[:,:,0]
     ch2 = ctrans_tosearch[:,:,1]
     ch3 = ctrans_tosearch[:,:,2]
@@ -44,6 +44,7 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
             ypos = yb*cells_per_step
             xpos = xb*cells_per_step
             # Extract HOG for this patch
+            print('Test')
             hog_feat1 = hog1[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
             hog_feat2 = hog2[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
             hog_feat3 = hog3[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
@@ -57,10 +58,13 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
           
             # Get color features
             spatial_features = bin_spatial(subimg, size=spatial_size)
+            
             hist_features = color_hist(subimg, nbins=hist_bins)
             # Scale features and make a prediction
-            a = np.hstack((spatial_features, hist_features, hog_features)).reshape(1, -1)
-            test_features = X_scaler.transform(a)    
+            print(spatial_features[10])
+            print(hist_features[10])
+            print(hog_features[10])
+            test_features = X_scaler.transform(np.hstack((spatial_features, hist_features, hog_features)).reshape(1, -1))    
             #test_features = X_scaler.transform(np.hstack((shape_feat, hist_feat)).reshape(1, -1))    
             test_prediction = svc.predict(test_features)
             

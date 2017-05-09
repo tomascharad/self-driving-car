@@ -26,24 +26,27 @@ def extract_features(imgs, cspace='RGB', orient=9, pix_per_cell=8, cell_per_bloc
         # Read in each one by one
         image = mpimg.imread(file)
         # apply color conversion if other than 'RGB'
-        feature_image = convert_color(image, cspace=cspace)      
+        feature_image = convert_color(image, cspace=cspace)
+        
 
         # Call get_hog_features() with vis=False, feature_vec=True
         if hog_channel == 'ALL':
             hog_features = []
             for channel in range(feature_image.shape[2]):
-                hog_features.append(get_hog_features(feature_image[:,:,channel], 
-                                    orient, pix_per_cell, cell_per_block, 
-                                    vis=False, feature_vec=True))
+                hog_features.append(get_hog_features(feature_image[:,:,channel], orient, pix_per_cell, cell_per_block, vis=False, feature_vec=True))
             hog_features = np.ravel(hog_features)        
         else:
-            hog_features = get_hog_features(feature_image[:,:,hog_channel], orient, 
-                        pix_per_cell, cell_per_block, vis=False, feature_vec=True)
+            hog_features = get_hog_features(feature_image[:,:,hog_channel], orient, pix_per_cell, cell_per_block, vis=False, feature_vec=True)
         
         spatial_features = bin_spatial(feature_image, size=spatial_size)
         # Apply color_hist() also with a color space option now
         hist_features = color_hist(feature_image, nbins=hist_bins, bins_range=hist_range)
         # Append the new feature vector to the features list
+        print('features')
+        print(spatial_features[0])
+        print(hist_features[0])
+        print(hog_features[0])
+        print('end')
         features.append(np.concatenate((spatial_features, hist_features, hog_features)))
     # Return list of feature vectors
     return features
@@ -96,7 +99,7 @@ def train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_c
         'pixels per cell and', cell_per_block,'cells per block')
     print('Feature vector length:', len(X_train[0]))
     # Use a linear SVC 
-    svc = LinearSVC()
+    svc = LinearSVC(C=0.01)
     # Check the training time for the SVC
     t=time.time()
     svc.fit(X_train, y_train)

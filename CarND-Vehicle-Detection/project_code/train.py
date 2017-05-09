@@ -8,15 +8,16 @@ from hog_classify import train
 import random
 
 cars = glob.glob('../vehicles/*/image*.png')
+# cars = glob.glob('../vehicles/GTI*/image*.png')
 notcars = glob.glob('../non-vehicles/*/image*.png')
 
-colorspace = 'HSV' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
-orient = 16
+colorspace = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
+orient = 9
 pix_per_cell = 8
-cell_per_block = 4
+cell_per_block = 2
 hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
-spatial_size = (16, 16)
-hist_bins = 16
+spatial_size = (32, 32)
+hist_bins = 32
 hist_range=(0, 256)
 print('Training')
 

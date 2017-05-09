@@ -12,7 +12,7 @@ for index, image_name in enumerate(image_names):
   print([colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range])
   svc = joblib.load('svc_dump.pkl')
   X_scaler = joblib.load('X_scaler_dump.pkl')
-  ystart = 300
+  ystart = 400
   ystop = None
   scale = 1.5
   [out_img, bboxes] = find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size, hist_bins, hist_range, colorspace, visualize=True)
