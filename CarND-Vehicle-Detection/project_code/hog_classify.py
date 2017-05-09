@@ -45,7 +45,7 @@ def extract_features(imgs, cspace='RGB', orient=9, pix_per_cell=8, cell_per_bloc
         print('features')
         print(spatial_features[0])
         print(hist_features[0])
-        print(hog_features[0])
+        print(hog_features)
         print('end')
         features.append(np.concatenate((spatial_features, hist_features, hog_features)))
     # Return list of feature vectors
@@ -99,7 +99,7 @@ def train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_c
         'pixels per cell and', cell_per_block,'cells per block')
     print('Feature vector length:', len(X_train[0]))
     # Use a linear SVC 
-    svc = LinearSVC(C=0.01)
+    svc = LinearSVC(C=0.001)
     # Check the training time for the SVC
     t=time.time()
     svc.fit(X_train, y_train)
