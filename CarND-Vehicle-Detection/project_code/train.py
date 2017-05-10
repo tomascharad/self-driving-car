@@ -7,9 +7,9 @@ import matplotlib.image as mpimg
 from hog_classify import train
 import random
 
-cars = glob.glob('../vehicles/*/image*.png')
+cars = glob.glob('../vehicles/*/*')
 # cars = glob.glob('../vehicles/GTI*/image*.png')
-notcars = glob.glob('../non-vehicles/*/image*.png')
+notcars = glob.glob('../non-vehicles/*/*')
 
 colorspace = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb
 orient = 9

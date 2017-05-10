@@ -43,9 +43,9 @@ def extract_features(imgs, cspace, orient, pix_per_cell, cell_per_block, hog_cha
         hist_features = color_hist(feature_image, nbins=hist_bins, bins_range=hist_range)
         # Append the new feature vector to the features list
         # print('features')
-        # print(spatial_features[10])
-        # print(hist_features)
-        # print(hog_features[10])
+        print(spatial_features[10])
+        print(hist_features[10])
+        print(hog_features[10])
         # print('end')
         features.append(np.concatenate((spatial_features, hist_features, hog_features)))
     # Return list of feature vectors

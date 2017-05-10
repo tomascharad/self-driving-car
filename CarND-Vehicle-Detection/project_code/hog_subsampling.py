@@ -59,7 +59,7 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
             # Get color features
             spatial_features = bin_spatial(subimg, size=spatial_size)
             
-            hist_features = color_hist(subimg, nbins=hist_bins)
+            hist_features = color_hist(subimg, hist_bins, hist_range)
             # Scale features and make a prediction
             print(spatial_features[10])
             print(hist_features)
