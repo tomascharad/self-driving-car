@@ -42,11 +42,11 @@ def extract_features(imgs, cspace, orient, pix_per_cell, cell_per_block, hog_cha
         # Apply color_hist() also with a color space option now
         hist_features = color_hist(feature_image, nbins=hist_bins, bins_range=hist_range)
         # Append the new feature vector to the features list
-        print('features')
-        print(spatial_features[10])
-        print(hist_features)
-        print(hog_features[10])
-        print('end')
+        # print('features')
+        # print(spatial_features[10])
+        # print(hist_features)
+        # print(hog_features[10])
+        # print('end')
         features.append(np.concatenate((spatial_features, hist_features, hog_features)))
     # Return list of feature vectors
     return features
@@ -93,13 +93,13 @@ def train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_c
     # Split up data into randomized training and test sets
     rand_state = np.random.randint(0, 100)
     X_train, X_test, y_train, y_test = train_test_split(
-        scaled_X, y, test_size=0.2, random_state=rand_state)
+        scaled_X, y, test_size=0.3, random_state=rand_state)
 
     print('Using:',orient,'orientations',pix_per_cell,
         'pixels per cell and', cell_per_block,'cells per block')
     print('Feature vector length:', len(X_train[0]))
     # Use a linear SVC 
-    svc = LinearSVC(C=0.0001)
+    svc = LinearSVC()
     # Check the training time for the SVC
     t=time.time()
     svc.fit(X_train, y_train)
@@ -115,8 +115,8 @@ def train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_c
     t2 = time.time()
     print(round(t2-t, 5), 'Seconds to predict', n_predict,'labels with SVC')
     print('Dumping session')
-    joblib.dump(svc, 'svc_dump.pkl')
-    joblib.dump(X_scaler, 'X_scaler_dump.pkl')
+    pickle.dump(svc, open('svc_dump.pkl', 'wb'))
+    pickle.dump(X_scaler, open('X_scaler_dump.pkl', 'wb'))
     pickle.dump([colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range], open("variables_dump.p", "wb"))
 
     print('Finish dumping')

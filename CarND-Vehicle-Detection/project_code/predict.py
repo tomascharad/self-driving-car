@@ -10,8 +10,8 @@ for index, image_name in enumerate(image_names):
   img = mpimg.imread(image_name)
   [colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range] = pickle.load(open("variables_dump.p", "rb"))
   print([colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range])
-  svc = joblib.load('svc_dump.pkl')
-  X_scaler = joblib.load('X_scaler_dump.pkl')
+  svc = pickle.load(open('svc_dump.pkl', 'rb'))
+  X_scaler = pickle.load(open('X_scaler_dump.pkl', 'rb'))
   ystart = 400
   ystop = None
   scale = 1.5
