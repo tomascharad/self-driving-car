@@ -18,7 +18,7 @@ cell_per_block = 2
 hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
 spatial_size = (32, 32)
 hist_bins = 32
-hist_range=(0, 256)
+hist_range=(0, 2)
 print('Training')
 
 train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range)
