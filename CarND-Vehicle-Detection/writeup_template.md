@@ -16,9 +16,25 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 [image1]: ./examples/car.png
-[image2]: ./examples/not_car.png
-[image3]: ./examples/HOG_example.jpg
-[image4]: ./examples/sliding_windows.jpg
+[image2]: ./examples/notcar.png
+[hog0]: ./test_output/car_hog0.jpg
+[hog1]: ./test_output/car_hog1.jpg
+[hog2]: ./test_output/car_hog2.jpg
+[hog3]: ./test_output/not_car_hog0.jpg
+[hog4]: ./test_output/not_car_hog1.jpg
+[hog5]: ./test_output/not_car_hog2.jpg
+[hog6]: ./test_output/orig_car_hog0.jpg
+[hog7]: ./test_output/orig_car_hog1.jpg
+[hog8]: ./test_output/orig_car_hog2.jpg
+[hog9]: ./test_output/orig_not_car_hog0.jpg
+[hog10]: ./test_output/orig_not_car_hog1.jpg
+[hog11]: ./test_output/orig_not_car_hog2.jpg
+[test0]: ./test_output/test0.png
+[test1]: ./test_output/test1.png
+[test2]: ./test_output/test2.png
+[test3]: ./test_output/test3.png
+[test4]: ./test_output/test4.png
+[test5]: ./test_output/test5.png
 [image5]: ./examples/sliding_window.jpg
 [image6]: ./examples/bboxes_and_heat.png
 [image7]: ./examples/labels_map.png
@@ -48,32 +64,53 @@ I start in the file train.py by reading in all the `vehicle` and `non-vehicle` i
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `HSV` color space and HOG parameters of `orient=16`, `pix_per_cell = 8` and `cell_per_block = 4`:
+Here is an example using the `HSV` color space and HOG parameters of:
+`orient = 9`
+`pix_per_cell = 8`
+`cell_per_block = 2`
+`hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"`
+`spatial_size = (32, 32)`
+`hist_bins = 32`
+`hist_range=(0, 256)`
 
-
-![alt text][image2]
+![alt text][hog0]
+![alt text][hog1]
+![alt text][hog2]
+![alt text][hog3]
+![alt text][hog4]
+![alt text][hog5]
+![alt text][hog6]
+![alt text][hog7]
+![alt text][hog8]
+![alt text][hog9]
+![alt text][hog10]
+![alt text][hog11]
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters but, they tend to have an excelent test accuracy, but they don't detect quite well in general, this was the best I could get.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using hog features, color histogram features and bin spatial features.
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
-
-![alt text][image3]
+The code for the sliding windows is in the `hog_subsampling.py` file in the `find_cars` method, starting from line 25.
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+I ended up searching in one scale YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided an average result.  Here are some example images:
 
-![alt text][image4]
+![alt text][test0]
+![alt text][test1]
+![alt text][test2]
+![alt text][test3]
+![alt text][test4]
+![alt text][test5]
+
 ---
 
 ### Video Implementation

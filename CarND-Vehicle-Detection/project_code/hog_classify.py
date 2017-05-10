@@ -18,7 +18,7 @@ from sklearn.cross_validation import train_test_split
 
 # Define a function to extract features from a list of images
 # Have this function call bin_spatial() and color_hist()
-def extract_features(imgs, cspace='RGB', orient=9, pix_per_cell=8, cell_per_block=2, hog_channel=0, spatial_size=(16, 16), hist_bins=16, hist_range=(0, 256)):
+def extract_features(imgs, cspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range):
     # Create a list to append feature vectors to
     features = []
     # Iterate through the list of images
@@ -71,12 +71,12 @@ def extract_features(imgs, cspace='RGB', orient=9, pix_per_cell=8, cell_per_bloc
 def train(cars, notcars, colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range):
 
     t=time.time()
-    car_features = extract_features(cars, cspace=colorspace, orient=orient, 
-                            pix_per_cell=pix_per_cell, cell_per_block=cell_per_block, 
-                            hog_channel=hog_channel, spatial_size=spatial_size, hist_bins=hist_bins)
-    notcar_features = extract_features(notcars, cspace=colorspace, orient=orient, 
-                            pix_per_cell=pix_per_cell, cell_per_block=cell_per_block, 
-                            hog_channel=hog_channel, spatial_size=spatial_size, hist_bins=hist_bins)
+    car_features = extract_features(cars, colorspace, orient, 
+                            pix_per_cell, cell_per_block, 
+                            hog_channel, spatial_size, hist_bins, hist_range)
+    notcar_features = extract_features(notcars, colorspace, orient, 
+                            pix_per_cell, cell_per_block, 
+                            hog_channel, spatial_size, hist_bins, hist_range)
     t2 = time.time()
     print(round(t2-t, 2), 'Seconds to extract HOG features...')
     # Create an array stack of feature vectors
