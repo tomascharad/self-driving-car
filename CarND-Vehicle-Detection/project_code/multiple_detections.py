@@ -66,7 +66,7 @@ def draw_labeled_bboxes(img, labels):
 # plt.imshow(heatmap, cmap='hot')
 # plt.title('Heat Map')
 # fig.tight_layout()
-def sinlge_image_detection(img):
+def sinlge_image_detection(img, vis=False):
   find_car_bboxes = get_bboxes(img)
   heat = np.zeros_like(img[:,:,0]).astype(np.float)
   heatmap = add_heat(heat, find_car_bboxes)
@@ -74,14 +74,19 @@ def sinlge_image_detection(img):
   cliped_heatmap = np.clip(heat, 0, 255)
   labels = label(cliped_heatmap)
   draw_img = draw_labeled_bboxes(np.copy(img), labels)
-  return [draw_img, cliped_heatmap]
+  to_return = draw_img
+  if vis:
+    to_return = [draw_img, cliped_heatmap]
+  return to_return
 
 
 def detect_multiple():
   image_names = glob.glob('../test_images/test*.jpg')
   for index, image_name in enumerate(image_names):
     img = mpimg.imread(image_name)
-    [draw_img, cliped_heatmap] = sinlge_image_detection(img)
+    [draw_img, cliped_heatmap] = sinlge_image_detection(img, True)
     print('Saving heatmap image' + str(index))
     mpimg.imsave('../test_output/test_labeled_heat' + str(index) + '.png', draw_img)
     mpimg.imsave('../test_output/test_heat' + str(index) + '.png', cliped_heatmap, cmap='hot')
+
+# detect_multiple()

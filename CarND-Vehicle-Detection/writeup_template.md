@@ -35,6 +35,21 @@ The goals / steps of this project are the following:
 [test3]: ./test_output/test3.png
 [test4]: ./test_output/test4.png
 [test5]: ./test_output/test5.png
+[heat0]: ./test_output/test_heat0.png
+[heat1]: ./test_output/test_heat1.png
+[heat2]: ./test_output/test_heat2.png
+[heat3]: ./test_output/test_heat3.png
+[heat4]: ./test_output/test_heat4.png
+[heat5]: ./test_output/test_heat5.png
+[test_labeled_heat0]: ./test_output/test_labeled_heat0.png
+[test_labeled_heat1]: ./test_output/test_labeled_heat1.png
+[test_labeled_heat2]: ./test_output/test_labeled_heat2.png
+[test_labeled_heat3]: ./test_output/test_labeled_heat3.png
+[test_labeled_heat4]: ./test_output/test_labeled_heat4.png
+[test_labeled_heat5]: ./test_output/test_labeled_heat5.png
+
+
+
 [image5]: ./examples/sliding_window.jpg
 [image6]: ./examples/bboxes_and_heat.png
 [image7]: ./examples/labels_map.png
@@ -116,7 +131,7 @@ I ended up searching in one scale YCrCb 3-channel HOG features plus spatially bi
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./test_output/video_state.mp4)
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -125,12 +140,20 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here are six labeled frames and their corresponding heatmaps:
 
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![Heat][heat0]: ./test_output/test_heat0.png
+![Heat][test_labeled_heat0]: ./test_output/test_labeled_heat0.png
+![Heat][heat1]: ./test_output/test_heat1.png
+![Heat][test_labeled_heat1]: ./test_output/test_labeled_heat1.png
+![Heat][heat2]: ./test_output/test_heat2.png
+![Heat][test_labeled_heat2]: ./test_output/test_labeled_heat2.png
+![Heat][heat3]: ./test_output/test_heat3.png
+![Heat][test_labeled_heat3]: ./test_output/test_labeled_heat3.png
+![Heat][heat4]: ./test_output/test_heat4.png
+![Heat][test_labeled_heat4]: ./test_output/test_labeled_heat4.png
+![Heat][heat5]: ./test_output/test_heat5.png
+![Heat][test_labeled_heat5]: ./test_output/test_labeled_heat5.png
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
