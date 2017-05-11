@@ -98,7 +98,7 @@ I trained a linear SVM using hog features, color histogram features and bin spat
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-The code for the sliding windows is in the `hog_subsampling.py` file in the `find_cars` method, starting from line 25.
+The code for the sliding windows is in the `hog_subsampling.py` file in the `find_cars` method, starting from line 25. I decided to scale from 1.0 to 2.0 with a 0.5 offset. I decided this after several iterations looking at how sliding windows were applied. The smallest scale, I just scaned from y=400 till y=460 just to focus on small cars.
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 

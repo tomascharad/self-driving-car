@@ -4,15 +4,15 @@ import numpy as np
 import pickle
 import cv2
 from scipy.ndimage.measurements import label
+from predict import get_bboxes
+import glob
 
 # Read in a pickle file with bboxes saved
 # Each item in the "all_bboxes" list will contain a 
 # list of boxes for one of the images shown above
-box_list = pickle.load( open( "bbox_pickle.p", "rb" ))
+# box_list = pickle.load( open( "bbox_pickle.p", "rb" ))
 
-# Read in image similar to one shown above 
-image = mpimg.imread('test_image.jpg')
-heat = np.zeros_like(image[:,:,0]).astype(np.float)
+
 
 def add_heat(heatmap, bbox_list):
     # Iterate through list of bboxes
@@ -46,23 +46,42 @@ def draw_labeled_bboxes(img, labels):
     return img
 
 # Add heat to each box in box list
-heat = add_heat(heat,box_list)
+# heat = add_heat(heat,box_list)
     
-# Apply threshold to help remove false positives
-heat = apply_threshold(heat,1)
+# # Apply threshold to help remove false positives
+# heat = apply_threshold(heat,1)
 
-# Visualize the heatmap when displaying    
-heatmap = np.clip(heat, 0, 255)
+# # Visualize the heatmap when displaying    
+# heatmap = np.clip(heat, 0, 255)
 
-# Find final boxes from heatmap using label function
-labels = label(heatmap)
-draw_img = draw_labeled_bboxes(np.copy(image), labels)
+# # Find final boxes from heatmap using label function
+# labels = label(heatmap)
+# draw_img = draw_labeled_bboxes(np.copy(image), labels)
 
-fig = plt.figure()
-plt.subplot(121)
-plt.imshow(draw_img)
-plt.title('Car Positions')
-plt.subplot(122)
-plt.imshow(heatmap, cmap='hot')
-plt.title('Heat Map')
-fig.tight_layout()
+# fig = plt.figure()
+# plt.subplot(121)
+# plt.imshow(draw_img)
+# plt.title('Car Positions')
+# plt.subplot(122)
+# plt.imshow(heatmap, cmap='hot')
+# plt.title('Heat Map')
+# fig.tight_layout()
+def sinlge_image_detection(img):
+  find_car_bboxes = get_bboxes(img)
+  heat = np.zeros_like(img[:,:,0]).astype(np.float)
+  heatmap = add_heat(heat, find_car_bboxes)
+  heatmap = apply_threshold(heatmap, 3)
+  cliped_heatmap = np.clip(heat, 0, 255)
+  labels = label(cliped_heatmap)
+  draw_img = draw_labeled_bboxes(np.copy(img), labels)
+  return [draw_img, cliped_heatmap]
+
+
+def detect_multiple():
+  image_names = glob.glob('../test_images/test*.jpg')
+  for index, image_name in enumerate(image_names):
+    img = mpimg.imread(image_name)
+    [draw_img, cliped_heatmap] = sinlge_image_detection(img)
+    print('Saving heatmap image' + str(index))
+    mpimg.imsave('../test_output/test_labeled_heat' + str(index) + '.png', draw_img)
+    mpimg.imsave('../test_output/test_heat' + str(index) + '.png', cliped_heatmap, cmap='hot')

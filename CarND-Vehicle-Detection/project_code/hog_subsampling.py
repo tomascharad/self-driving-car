@@ -6,7 +6,7 @@ import cv2
 from lesson_functions import *
 
 # Define a single function that can extract features using hog sub-sampling and make predictions
-def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size, hist_bins, hist_range, colorspace, visualize=False):
+def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size, hist_bins, hist_range, colorspace):
     
     draw_img = np.copy(img)
     img = img.astype(np.float32)/255
@@ -44,7 +44,6 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
             ypos = yb*cells_per_step
             xpos = xb*cells_per_step
             # Extract HOG for this patch
-            print('Test')
             hog_feat1 = hog1[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
             hog_feat2 = hog2[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
             hog_feat3 = hog3[ypos:ypos+nblocks_per_window, xpos:xpos+nblocks_per_window].ravel() 
@@ -61,25 +60,21 @@ def find_cars(img, ystart, ystop, scale, svc, X_scaler, orient, pix_per_cell, ce
             
             hist_features = color_hist(subimg, hist_bins, hist_range)
             # Scale features and make a prediction
-            print(spatial_features[10])
-            print(hist_features)
-            print(hog_features[10])
+            # print(spatial_features[10])
+            # print(hist_features)
+            # print(hog_features[10])
             test_features = X_scaler.transform(np.hstack((spatial_features, hist_features, hog_features)).reshape(1, -1))    
             #test_features = X_scaler.transform(np.hstack((shape_feat, hist_feat)).reshape(1, -1))    
             test_prediction = svc.predict(test_features)
             
             if test_prediction == 1:
+            # if (yb == 0 or yb == 1) and xb == 0:
                 xbox_left = np.int(xleft*scale)
                 ytop_draw = np.int(ytop*scale)
                 win_draw = np.int(window*scale)
                 bbox = ((xbox_left, ytop_draw+ystart), (xbox_left+win_draw,ytop_draw+win_draw+ystart))
                 bboxes.append(bbox)
-                if visualize:
-                    cv2.rectangle(draw_img, bbox[0], bbox[1], (0,0,255), 6) 
-    to_return = bboxes
-    if visualize:
-        to_return = [draw_img, bboxes]
-    return to_return
+    return bboxes
     
 # ystart = 400
 # ystop = 656
