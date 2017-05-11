@@ -1,3 +1,4 @@
 non-vehicles/
 vehicles/
 !test_output/*.jpg
+!test_output/video_state_final.mp4

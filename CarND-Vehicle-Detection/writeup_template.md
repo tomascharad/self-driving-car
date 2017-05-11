@@ -101,21 +101,21 @@ Here is an example using the `HSV` color space and HOG parameters of:
 ![alt text][hog10]
 ![alt text][hog11]
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 I tried various combinations of parameters but, they tend to have an excelent test accuracy, but they don't detect quite well in general, this was the best I could get.
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 I trained a linear SVM using hog features, color histogram features and bin spatial features.
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
 The code for the sliding windows is in the `hog_subsampling.py` file in the `find_cars` method, starting from line 25. I decided to scale from 1.0 to 2.0 with a 0.5 offset. I decided this after several iterations looking at how sliding windows were applied. The smallest scale, I just scaned from y=400 till y=460 just to focus on small cars.
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 I ended up searching in one scale YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided an average result.  Here are some example images:
 
@@ -130,13 +130,15 @@ I ended up searching in one scale YCrCb 3-channel HOG features plus spatially bi
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./test_output/video_state.mp4)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+Here's a [link to my video result](./test_output/video_state_final.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+
+I also added a deque of length 10, and averaged the heatmaps in order to soften the labels of the detected cars. This way we also improve the removal of false positives.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
@@ -162,9 +164,13 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project. Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+The most time consuming part what discovering that I wasn't using all of the training data, so that made my algorithm to not perform well and I spent a lot of time figuring out why.
+
+The pipeline is very robust right now, I think though that all of the traiing data is quite tailored for this pipeline, it would be interesting to evaluate the performance with real world images.
+
+I also will love to know how to make the processing faster so I could apply this to live detection algorithm.
 

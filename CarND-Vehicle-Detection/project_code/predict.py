@@ -8,7 +8,6 @@ import numpy as np
 
 def get_bboxes(img):
   [colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range] = pickle.load(open("variables_dump.p", "rb"))
-  print([colorspace, orient, pix_per_cell, cell_per_block, hog_channel, spatial_size, hist_bins, hist_range])
   svc = pickle.load(open('svc_dump.pkl', 'rb'))
   X_scaler = pickle.load(open('X_scaler_dump.pkl', 'rb'))
   
